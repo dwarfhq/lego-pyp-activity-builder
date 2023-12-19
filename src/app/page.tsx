@@ -1,7 +1,7 @@
 "use client";
 import BrickBuilder from "pyp-brick-builder";
 import "pyp-brick-builder/dist/style.css";
-console.log("BrickBuilder:", BrickBuilder);
+import { useEffect, useState } from "react";
 
 const testOptions = {
   name: "Emerald Duck",
@@ -33,9 +33,11 @@ const testOptions = {
 };
 
 export default function Page() {
+  const [hasMounted, setHasMounted] = useState(false);
+  useEffect(() => setHasMounted(true), []);
   return (
     <div className="w-[100dvw] h-[100dvh]">
-      <BrickBuilder options={testOptions} />
+      {hasMounted && <BrickBuilder options={testOptions} />}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import { groq } from "next-sanity";
 import { client } from "../lib/client";
 
-function downloadJson(activity) {
+function downloadJson(activity: any) {
   const dataStr =
     "data:text/json;charset=utf-8," +
     encodeURIComponent(JSON.stringify(activity));
@@ -25,7 +25,15 @@ const query = groq`*[_type == "activity" && slug.current == $slug][0]{
   }
 }`;
 
-export function SaveJsonAction({ draft, published, onComplete }) {
+export function SaveJsonAction({
+  draft,
+  published,
+  onComplete,
+}: {
+  draft: boolean;
+  published: any;
+  onComplete: () => void;
+}) {
   return {
     disabled: draft,
     label: "Download activity data",
