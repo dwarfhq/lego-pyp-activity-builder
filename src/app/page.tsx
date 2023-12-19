@@ -1,39 +1,41 @@
-import Home from "@/components/Home";
-import { db } from "@/lib/db";
-import { activities, builds } from "@/lib/schema";
+"use client";
+import BrickBuilder from "pyp-brick-builder";
+import "pyp-brick-builder/dist/style.css";
+console.log("BrickBuilder:", BrickBuilder);
 
-const createActivity = async () => {
-  "use server";
-
-  const result = await db.insert(activities).values({
-    name: "test activity",
-  });
-  console.log("result:", result);
+const testOptions = {
+  name: "Emerald Duck",
+  slug: "emerald-duck",
+  bricks: [
+    {
+      color: "#00c26b",
+      element_id: "3003",
+      name: "2x2",
+      texture: null,
+      amount: 4,
+    },
+    {
+      color: "#ff191c",
+      element_id: "3021",
+      name: "2x3 flat",
+      texture: null,
+      amount: 3,
+    },
+    {
+      color: "#00c26b",
+      element_id: "3005",
+      name: "1x1",
+      texture:
+        "https://cdn.sanity.io/images/e73x02f5/production/8be58a2983aa6ce89aff7f65b879f5c82063fcb1-370x223.png",
+      amount: 3,
+    },
+  ],
 };
 
-export default async function Page() {
-  const data = await db.select().from(activities);
-  const a = await db.query.activities.findMany({
-    with: {
-      builds: true,
-    },
-  });
-  console.log("a:", a);
-
+export default function Page() {
   return (
-    <div>
-      USERS:
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-      <form action={createActivity}>
-        <button type="submit">Submit to add test activity</button>
-      </form>
-      {a.map((activity) => (
-        <div key={activity.id}>
-          <h1>{activity.name}</h1>
-          <pre>{JSON.stringify(activity.builds, null, 2)}</pre>
-        </div>
-      ))}
-      <Home />
+    <div className="w-[100dvw] h-[100dvh]">
+      <BrickBuilder options={testOptions} />
     </div>
   );
 }

@@ -44,16 +44,6 @@ function Builder() {
         rotation: 0,
       },
     ]);
-    const res = await fetch("/api/build", {
-      method: "POST",
-      body: JSON.stringify({
-        activityId: 2,
-        data: data,
-      }),
-    });
-    console.log("res:", res);
-    const returned = await res.json();
-    console.log("returned:", returned);
   }
 
   console.log("data:", data);

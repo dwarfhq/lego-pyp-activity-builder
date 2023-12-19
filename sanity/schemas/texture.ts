@@ -1,9 +1,9 @@
 import { defineField, defineType } from "sanity";
 
 export default defineType({
-  name: "shape",
+  name: "texture",
   type: "document",
-  title: "Shapes",
+  title: "Textures",
   fields: [
     defineField({
       name: "name",
@@ -11,9 +11,9 @@ export default defineType({
       title: "Name",
     }),
     defineField({
-      name: "id",
-      type: "string",
-      title: "Element ID",
+      name: "image",
+      type: "image",
+      title: "Image",
     }),
   ],
 });
